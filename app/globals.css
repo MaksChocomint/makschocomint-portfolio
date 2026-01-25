@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-garden-dark: #0f1014;
+  --color-garden-card: #18191f;
+  --color-garden-moss: #8cc57e;
+  --color-garden-rust: #e06c4d;
+  --color-garden-cream: #fceecb;
+  --color-garden-dim: #4a4b50;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-pixel: var(--font-pixel), monospace;
+  --font-mono: var(--font-mono), monospace;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 2s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.6;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    @apply bg-garden-dark text-garden-cream font-mono overflow-x-hidden;
+    background-image:
+      radial-gradient(circle at center, #1a1b20 0%, transparent 1%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size:
+      24px 24px,
+      40px 40px,
+      40px 40px;
+  }
+
+  /* Кастомный скроллбар */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(15, 16, 20, 0.8);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      45deg,
+      var(--color-garden-moss),
+      var(--color-garden-rust)
+    );
+    border-radius: 5px;
+    border: 2px solid var(--color-garden-dark);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      45deg,
+      var(--color-garden-rust),
+      var(--color-garden-moss)
+    );
+  }
+
+  /* Для Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-garden-moss) var(--color-garden-dark);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(140, 197, 126, 0.5);
+  }
 }

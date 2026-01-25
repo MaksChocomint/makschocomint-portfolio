@@ -1,65 +1,94 @@
+import { Hero } from "@/components/sections/Hero";
+import { Skills } from "@/components/sections/Skills";
+import { Projects } from "@/components/sections/Projects";
+import { BloomingSection } from "@/components/ui/BloomingSection";
+import { PixelCat } from "@/components/art/PixelCat";
+import { TetrisBackground } from "@/components/ui/TetrisBackground"; // Новый компонент
 import Image from "next/image";
+import { SKILLS_DATA } from "@/data/skills";
+import { PROJECTS_DATA } from "@/data/projects";
+import { SERVICES_DATA } from "@/data/services";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+    <>
+      {/* Фоновый тетрис */}
+      <TetrisBackground />
+
+      <main className="max-w-6xl mx-auto px-6 py-24 space-y-32 relative z-10">
+        {/* 1. Hero Section */}
+        <Hero />
+
+        {/* 2. Skills Section */}
+        <Skills items={SKILLS_DATA} />
+
+        {/* 3. Projects Section */}
+        <Projects data={PROJECTS_DATA} />
+
+        {/* 4. Services Section */}
+        <section>
+          <div className="flex items-center gap-4 mb-10">
+            <h2 className="font-pixel text-5xl text-garden-cream">Магазин_</h2>
+            <div className="h-0.5 bg-garden-dim flex-1 opacity-30"></div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {SERVICES_DATA.map((service, idx) => (
+              <BloomingSection
+                key={service.title}
+                title={service.title}
+                index={idx}
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <Image
+                    className="text-4xl"
+                    src={service.icon}
+                    alt={service.title}
+                    width={120}
+                    height={120}
+                  />
+                  <div className="font-pixel text-base text-white text-right mt-4">
+                    <div>{service.price}</div>
+                    {service.period && (
+                      <div className="text-sm opacity-80">{service.period}</div>
+                    )}
+                  </div>
+                </div>
+                <button className="cursor-pointer w-full py-2 bg-zinc-800 border border-garden-dim font-pixel text-xl hover:bg-garden-rust hover:border-garden-rust transition-all duration-300">
+                  Купить_
+                </button>
+              </BloomingSection>
+            ))}
+          </div>
+        </section>
+
+        {/* 5. Footer */}
+        <footer className="pt-10 pb-20 border-t border-garden-dim/30 text-center relative backdrop-blur-sm bg-garden-dark/30">
+          <h2 className="font-pixel text-xl mb-2 text-garden-moss">
+            Свяжитесь со мной_
+          </h2>
+          <div className="flex justify-center gap-8 font-pixel text-lg mt-6">
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="https://t.me/makschocomint"
+              className="hover:text-garden-rust transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
+              Telegram
+            </a>
             <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="https://github.com/makschocomint"
+              className="hover:text-garden-rust transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              Github
+            </a>
+          </div>
+          <div className="absolute right-10 bottom-0 opacity-50 grayscale hover:grayscale-0 transition-all">
+            <PixelCat />
+          </div>
+        </footer>
       </main>
-    </div>
+    </>
   );
 }
