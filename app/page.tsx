@@ -72,15 +72,18 @@ export default function Home() {
                     )}
                   </div>
                 </div>
-                <button
-                  className="cursor-pointer w-full py-2 bg-zinc-800 border border-garden-dim font-pixel text-xl hover:bg-garden-rust hover:border-garden-rust transition-all duration-300 animate-slide-in-up opacity-0"
+                <a
+                  className="text-center cursor-pointer w-full py-2 bg-zinc-800 border border-garden-dim font-pixel text-xl hover:bg-garden-rust hover:border-garden-rust transition-all duration-300 animate-slide-in-up opacity-0"
                   style={{
                     animationFillMode: "forwards",
                     animationDelay: `${idx * 100 + 400}ms`,
                   }}
+                  href="https://t.me/makschocomint"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Купить_
-                </button>
+                </a>
               </BloomingSection>
             ))}
           </div>

@@ -46,7 +46,7 @@ export function BloomingSection({
       </h2>
 
       <div
-        className={`animate-fade-in opacity-0 ${delayClass}`}
+        className={`animate-fade-in h-full flex flex-col justify-between opacity-0 ${delayClass}`}
         style={{ animationFillMode: "forwards", animationDelay: "200ms" }}
       >
         {children}
