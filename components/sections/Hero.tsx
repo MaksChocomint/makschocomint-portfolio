@@ -1,11 +1,12 @@
+// Hero component - улучшен для мобильных
 import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-20">
-      <div className="relative group shrink-0">
+    <section className="relative flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-20">
+      <div className="relative group shrink-0 mx-auto md:mx-0">
         <div
-          className="md:w-64 md:h-64 border-4 border-garden-moss bg-garden-card relative overflow-hidden shadow-[8px_8px_0px_0px_rgba(74,75,80,0.5)] animate-scale-in opacity-0"
+          className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 border-4 border-garden-moss bg-garden-card relative overflow-hidden shadow-[4px_4px_0px_0px_rgba(74,75,80,0.5)] md:shadow-[8px_8px_0px_0px_rgba(74,75,80,0.5)] animate-scale-in opacity-0"
           style={{ animationFillMode: "forwards" }}
         >
           <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%,transparent_100%)] bg-[length:20px_20px]" />
@@ -16,11 +17,12 @@ export function Hero() {
                 alt="Profile Picture"
                 width={300}
                 height={300}
-                className="w-30 h-30 md:w-38 md:h-38 border-2 border-garden-cream shadow-md shadow-garden-cream/30"
+                className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 border-2 border-garden-cream shadow-md shadow-garden-cream/30"
+                priority
               />
             </div>
             <p
-              className="font-pixel text-garden-dim md:text-lg md:mt-2 animate-fade-in opacity-0"
+              className="font-pixel text-garden-dim text-sm sm:text-base md:text-lg mt-2 animate-fade-in opacity-0"
               style={{ animationFillMode: "forwards", animationDelay: "300ms" }}
             >
               NPC_MAKS
@@ -29,24 +31,27 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="flex-1 text-center md:text-left space-y-6">
+      <div className="flex-1 text-center md:text-left space-y-4 sm:space-y-6">
         <h1
-          className="font-pixel text-5xl md:text-8xl text-garden-moss uppercase leading-[0.7] text-glow animate-slide-in-left opacity-0"
+          className="font-pixel text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-garden-moss uppercase leading-[0.8] sm:leading-[0.7] text-glow animate-slide-in-left opacity-0"
           style={{ animationFillMode: "forwards" }}
         >
-          Максим <br /> <span className="text-garden-cream p-4">Иванов</span>
+          Максим <br className="hidden sm:block" />
+          <span className="text-garden-cream px-2 sm:p-4 inline-block">
+            Иванов
+          </span>
         </h1>
         <p
-          className="font-mono text-zinc-400 max-w-lg text-sm md:text-base p-4 animate-fade-in opacity-0"
+          className="font-mono text-zinc-400 max-w-lg text-sm sm:text-base p-2 sm:p-4 animate-fade-in opacity-0"
           style={{ animationFillMode: "forwards", animationDelay: "200ms" }}
         >
           Fullstack-разработчик
         </p>
         <div
-          className="flex gap-4 justify-center md:justify-start p-4 font-pixel text-xl animate-fade-in opacity-0"
+          className="flex gap-3 sm:gap-4 justify-center md:justify-start p-2 sm:p-4 font-pixel text-lg sm:text-xl animate-fade-in opacity-0"
           style={{ animationFillMode: "forwards", animationDelay: "300ms" }}
         >
-          <button className="cursor-pointer px-6 py-2 bg-garden-moss text-garden-dark hover:bg-garden-cream hover:-translate-y-1 transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)]">
+          <button className="cursor-pointer px-4 sm:px-6 py-2 sm:py-2 bg-garden-moss text-garden-dark hover:bg-garden-cream hover:-translate-y-1 transition-all shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)] sm:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] text-sm sm:text-base">
             РЕЗЮМЕ
           </button>
         </div>
