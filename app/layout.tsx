@@ -29,13 +29,17 @@ export const metadata: Metadata = {
     "веб-разработка",
     "Next.js разработчик",
     "React",
+    "Сделать сайт",
+    "Сайты недорого",
+    "Услуги разработки",
+    "Frontend",
     "Фронтенд",
     "Пиксель-арт портфолио",
     "Создание сайтов",
     "Максим Иванов",
   ],
 
-  authors: [{ name: "Maxim Ivanov", url: "https://t.me/makschocomint" }],
+  authors: [{ name: "Maksim Ivanov", url: "https://t.me/makschocomint" }],
 
   openGraph: {
     title: "Максим Иванов | Портфолио Разработчика",
@@ -68,6 +72,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="scroll-smooth">
+      <head>
+        <meta
+          name="apple-mobile-web-app-title"
+          content="Makschocomint Portfolio"
+        />
+      </head>
       <body
         className={`${pixelFont.variable} ${monoFont.variable} antialiased bg-garden-dark text-garden-text selection:bg-garden-moss selection:text-garden-dark`}
       >
