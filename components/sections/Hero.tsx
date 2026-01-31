@@ -1,4 +1,4 @@
-// Hero component - улучшен для мобильных
+import { ResumeButton } from "../ui/ResumeButton";
 import Image from "next/image";
 
 export function Hero() {
@@ -9,7 +9,7 @@ export function Hero() {
           className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 border-4 border-garden-moss bg-garden-card relative overflow-hidden shadow-[4px_4px_0px_0px_rgba(74,75,80,0.5)] md:shadow-[8px_8px_0px_0px_rgba(74,75,80,0.5)] animate-scale-in opacity-0"
           style={{ animationFillMode: "forwards" }}
         >
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%,transparent_100%)] bg-[length:20px_20px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%,transparent_100%)] bg-size-[20px_20px]" />
           <div className="w-full h-full flex flex-col items-center justify-center p-4">
             <div className="animate-float">
               <Image
@@ -51,9 +51,7 @@ export function Hero() {
           className="flex gap-3 sm:gap-4 justify-center md:justify-start p-2 sm:p-4 font-pixel text-lg sm:text-xl animate-fade-in opacity-0"
           style={{ animationFillMode: "forwards", animationDelay: "300ms" }}
         >
-          <button className="cursor-pointer px-4 sm:px-6 py-2 sm:py-2 bg-garden-moss text-garden-dark hover:bg-garden-cream hover:-translate-y-1 transition-all shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)] sm:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] text-sm sm:text-base">
-            РЕЗЮМЕ
-          </button>
+          <ResumeButton />
         </div>
       </div>
     </section>

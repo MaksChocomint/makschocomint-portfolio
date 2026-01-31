@@ -24,6 +24,7 @@ export function PixelCat({ className }: { className?: string }) {
 
   const handleCatClick = () => {
     if (status === "idle") setStatus("menu");
+    else if (status === "menu") setStatus("idle");
   };
 
   const handlePet = (choice: boolean) => {

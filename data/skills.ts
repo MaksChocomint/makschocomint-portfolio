@@ -15,5 +15,6 @@ export const SKILLS_DATA = [
   "Git",
   "Linux",
   "FastAPI",
+  "SQLAlchemy",
   "Figma",
 ];
