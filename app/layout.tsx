@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 // Заменяем VT323 на Pixelify_Sans, так как VT323 не умеет в кириллицу
 import { JetBrains_Mono, Press_Start_2P } from "next/font/google";
 import "./globals.css";
-
+import Metrika from "@/lib/Metrika";
 // 1. Настраиваем пиксельный шрифт с поддержкой кириллицы
 const pixelFont = Press_Start_2P({
   subsets: ["latin", "cyrillic"], // Обязательно добавляем cyrillic
@@ -84,6 +84,7 @@ export default function RootLayout({
         className={`${pixelFont.variable} ${monoFont.variable} antialiased bg-garden-dark text-garden-text selection:bg-garden-moss selection:text-garden-dark`}
       >
         {children}
+        <Metrika />
       </body>
     </html>
   );
