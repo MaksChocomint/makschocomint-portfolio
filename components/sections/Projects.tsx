@@ -7,7 +7,7 @@ interface Project {
   title: string;
   desc: string;
   imageUrl: string;
-  githubLink: string;
+  githubLink?: string;
   demoLink?: string;
   isHot?: boolean;
 }
@@ -56,15 +56,16 @@ export function Projects({ data }: { data: Project[] }) {
                     Демо
                   </a>
                 )}
-
-                <a
-                  className="text-zinc-500 hover:text-garden-cream underline cursor-pointer"
-                  href={project.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Код
-                </a>
+                {project.githubLink && (
+                  <a
+                    className="text-zinc-500 hover:text-garden-cream underline cursor-pointer"
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Код
+                  </a>
+                )}
               </div>
             </div>
           </BloomingSection>

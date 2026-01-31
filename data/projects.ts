@@ -22,7 +22,6 @@ export const PROJECTS_DATA = [
     title: "AI-Codenames",
     desc: 'Легендарная настольная игра "Codenames" теперь онлайн с современным дизайном и возможностью добавлять новые паки слов, а также играть с ИИ-ботами.',
     imageUrl: "/projects/codenames.webp",
-    githubLink: "https://github.com/MaksChocomint/ai-codenames",
     demoLink: "https://aicodenames.vercel.app/",
     isHot: false,
   },
