@@ -8,7 +8,7 @@ export function ResumeButton() {
 
   const handleDownload = async () => {
     try {
-      await downloadFile("/files/resume.docx", "Иванов_Максим_Резюме.docx");
+      await downloadFile("/files/resume.pdf", "Иванов_Максим_Резюме.pdf");
     } catch (error) {
       console.error(
         `Не удалось скачать резюме. Пожалуйста, попробуйте позже. ${error}`,
