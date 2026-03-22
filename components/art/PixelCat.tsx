@@ -164,7 +164,7 @@ export function PixelCat({ className }: { className?: string }) {
               transition: { duration: 0.2, ease: "easeOut" },
             }}
             transition={buttonSpring}
-            className="absolute left-full top-[68%] z-10 ml-2 flex items-center gap-2 whitespace-nowrap rounded-md border-4 border-black bg-garden-cream px-2 py-1 font-pixel text-sm text-black shadow-lg transition-colors hover:bg-garden-moss"
+            className="absolute left-1/2 top-[68%] z-10 ml-2 flex items-center gap-2 whitespace-nowrap rounded-md border-4 border-black bg-garden-cream px-2 py-1 font-pixel text-sm text-black shadow-lg transition-colors hover:bg-garden-moss"
           >
             <Github size={36} />
             SOURCE
@@ -175,10 +175,14 @@ export function PixelCat({ className }: { className?: string }) {
       <motion.button
         type="button"
         className={`relative block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-garden-moss ${
-          isInteractive ? "cursor-pointer" : "pointer-events-none grayscale-[0.5]"
+          isInteractive
+            ? "cursor-pointer"
+            : "pointer-events-none grayscale-[0.5]"
         }`}
         onClick={handleCatClick}
-        aria-label={status === "menu" ? "Закрыть меню котика" : "Открыть меню котика"}
+        aria-label={
+          status === "menu" ? "Закрыть меню котика" : "Открыть меню котика"
+        }
         aria-expanded={status === "menu"}
         aria-disabled={!isInteractive}
         animate={{
