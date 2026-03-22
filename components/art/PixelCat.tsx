@@ -11,6 +11,12 @@ export function PixelCat({ className }: { className?: string }) {
   const [status, setStatus] = useState<CatStatus>("idle");
   const [handAnimationKey, setHandAnimationKey] = useState(0);
   const resetTimerRef = useRef<number | null>(null);
+  const buttonSpring = {
+    type: "spring" as const,
+    stiffness: 380,
+    damping: 28,
+    mass: 0.7,
+  };
 
   const clearResetTimer = () => {
     if (resetTimerRef.current !== null) {
@@ -30,6 +36,10 @@ export function PixelCat({ className }: { className?: string }) {
   useEffect(() => clearResetTimer, []);
 
   const handleCatClick = () => {
+    if (!isInteractive) {
+      return;
+    }
+
     if (status === "idle") {
       setStatus("menu");
       return;
@@ -57,32 +67,38 @@ export function PixelCat({ className }: { className?: string }) {
   const isInteractive = !isLocked && !isHappy;
 
   return (
-    <div className={`relative inline-block ${className ?? ""}`}>
+    <div
+      className={`relative inline-flex h-[150px] w-[150px] items-end justify-start align-bottom ${className ?? ""}`}
+    >
       <AnimatePresence>
         {isHappy && (
           <motion.div
             key={`hand-${handAnimationKey}`}
-            initial={{ opacity: 0, scale: 0.8, x: -20, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9, x: 8, y: 24, rotate: -20 }}
             animate={{
               opacity: 1,
-              scale: 1,
-              x: [20, 50, 20],
-              y: [20, 10, 20],
+              scale: [0.96, 1, 0.98, 1, 0.98],
+              x: [10, 28, 16, 28, 16],
+              y: [18, 2, 14, 2, 14],
+              rotate: [-18, -6, -14, -6, -14],
             }}
             exit={{
               opacity: 0,
-              scale: 0.8,
-              x: 30,
+              scale: 0.92,
+              x: 20,
               y: 20,
-              transition: { duration: 0.3 },
+              rotate: -12,
+              transition: { duration: 0.25, ease: "easeInOut" },
             }}
             transition={{
-              duration: 1.5,
+              duration: 1.6,
+              times: [0, 0.25, 0.5, 0.75, 1],
               repeat: 2,
-              repeatType: "loop",
+              repeatType: "mirror",
               ease: "easeInOut",
             }}
-            className="absolute -top-8 left-0 z-30 text-garden-cream pointer-events-none"
+            className="absolute -top-6 left-2 z-30 text-garden-cream pointer-events-none will-change-transform"
+            style={{ transformOrigin: "80% 100%" }}
           >
             <Hand
               size={48}
@@ -98,14 +114,15 @@ export function PixelCat({ className }: { className?: string }) {
         {status === "menu" && (
           <motion.div
             key="menu"
-            initial={{ opacity: 0, y: 10, scale: 0.8 }}
-            animate={{ opacity: 1, y: -60, scale: 1 }}
+            initial={{ opacity: 0, y: -42, scale: 0.94 }}
+            animate={{ opacity: 1, y: -56, scale: 1 }}
             exit={{
               opacity: 0,
-              y: -40,
-              scale: 0.9,
-              transition: { duration: 0.2 },
+              y: -46,
+              scale: 0.97,
+              transition: { duration: 0.18, ease: "easeOut" },
             }}
+            transition={buttonSpring}
             className="absolute -top-3 left-1/2 -translate-x-[47%] z-50 bg-garden-dark border-2 border-garden-moss p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center gap-2 min-w-[120px]"
           >
             <p className="font-pixel text-xs text-white whitespace-nowrap">
@@ -138,14 +155,16 @@ export function PixelCat({ className }: { className?: string }) {
             href="https://github.com/MaksChocomint/makschocomint-portfolio"
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 60 }}
+            initial={{ opacity: 0, x: -6, scale: 0.96 }}
+            animate={{ opacity: 1, x: 12, scale: 1 }}
             exit={{
               opacity: 0,
-              x: -10,
-              transition: { duration: 1 },
+              x: 0,
+              scale: 0.98,
+              transition: { duration: 0.2, ease: "easeOut" },
             }}
-            className="absolute top-[70%] flex items-center gap-2 bg-garden-cream text-black px-2 py-1 rounded-md font-pixel border-4 border-black text-sm hover:bg-garden-moss transition-all shadow-lg z-10 whitespace-nowrap"
+            transition={buttonSpring}
+            className="absolute left-full top-[68%] z-10 ml-2 flex items-center gap-2 whitespace-nowrap rounded-md border-4 border-black bg-garden-cream px-2 py-1 font-pixel text-sm text-black shadow-lg transition-colors hover:bg-garden-moss"
           >
             <Github size={36} />
             SOURCE
@@ -161,9 +180,16 @@ export function PixelCat({ className }: { className?: string }) {
         onClick={handleCatClick}
         aria-label={status === "menu" ? "Закрыть меню котика" : "Открыть меню котика"}
         aria-expanded={status === "menu"}
-        disabled={!isInteractive}
-        whileHover={isInteractive ? { scale: 1.05 } : {}}
-        whileTap={isInteractive ? { scale: 0.95 } : {}}
+        aria-disabled={!isInteractive}
+        animate={{
+          scale: status === "menu" ? 1.02 : 1,
+          y: status === "menu" ? -2 : 0,
+          filter: isLocked ? "grayscale(0.5)" : "grayscale(0)",
+        }}
+        transition={buttonSpring}
+        whileHover={isInteractive ? { scale: 1.035, y: -4 } : undefined}
+        whileTap={isInteractive ? { scale: 0.985, y: 0 } : undefined}
+        style={{ willChange: "transform, filter" }}
       >
         <Image
           width={150}
