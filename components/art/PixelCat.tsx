@@ -1,61 +1,63 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { Github, Hand } from "lucide-react";
 
-export function PixelCat({ className }: { className?: string }) {
-  const [status, setStatus] = useState<
-    "idle" | "menu" | "accepted" | "rejected"
-  >("idle");
-  const [mounted, setMounted] = useState(false);
-  const [handAnimationKey, setHandAnimationKey] = useState(0);
-  const handTimerRef = useRef<NodeJS.Timeout | null>(null);
+type CatStatus = "idle" | "menu" | "accepted" | "rejected";
 
-  useEffect(() => {
-    setMounted(true);
-    return () => {
-      // Очищаем таймеры при размонтировании
-      if (handTimerRef.current) {
-        clearTimeout(handTimerRef.current);
-      }
-    };
-  }, []);
+export function PixelCat({ className }: { className?: string }) {
+  const [status, setStatus] = useState<CatStatus>("idle");
+  const [handAnimationKey, setHandAnimationKey] = useState(0);
+  const resetTimerRef = useRef<number | null>(null);
+
+  const clearResetTimer = () => {
+    if (resetTimerRef.current !== null) {
+      window.clearTimeout(resetTimerRef.current);
+      resetTimerRef.current = null;
+    }
+  };
+
+  const scheduleReset = (delayMs: number) => {
+    clearResetTimer();
+    resetTimerRef.current = window.setTimeout(() => {
+      setStatus("idle");
+      resetTimerRef.current = null;
+    }, delayMs);
+  };
+
+  useEffect(() => clearResetTimer, []);
 
   const handleCatClick = () => {
-    if (status === "idle") setStatus("menu");
-    else if (status === "menu") setStatus("idle");
+    if (status === "idle") {
+      setStatus("menu");
+      return;
+    }
+
+    if (status === "menu") {
+      setStatus("idle");
+    }
   };
 
   const handlePet = (choice: boolean) => {
     if (choice) {
       setStatus("accepted");
-      // Генерируем новый ключ для принудительного ререндера анимации руки
       setHandAnimationKey((prev) => prev + 1);
-
-      // Очищаем предыдущий таймер
-      if (handTimerRef.current) {
-        clearTimeout(handTimerRef.current);
-      }
-
-      // Устанавливаем таймер для возврата в idle
-      handTimerRef.current = setTimeout(() => {
-        setStatus("idle");
-      }, 4500); // 3 цикла по 1.5с = 4500мс
-    } else {
-      setStatus("rejected");
-      setTimeout(() => setStatus("idle"), 2000);
+      scheduleReset(4500);
+      return;
     }
+
+    setStatus("rejected");
+    scheduleReset(2000);
   };
 
   const isLocked = status === "rejected";
   const isHappy = status === "accepted";
-
-  if (!mounted) return <div className="w-37.5 h-37.5" />;
+  const isInteractive = !isLocked && !isHappy;
 
   return (
-    <div className={`relative inline-block ${className || ""}`}>
-      {/* 1. Рука, которая гладит - упрощенная анимация без repeat */}
+    <div className={`relative inline-block ${className ?? ""}`}>
       <AnimatePresence>
         {isHappy && (
           <motion.div
@@ -64,7 +66,7 @@ export function PixelCat({ className }: { className?: string }) {
             animate={{
               opacity: 1,
               scale: 1,
-              x: [20, 50, 20], // Один цикл
+              x: [20, 50, 20],
               y: [20, 10, 20],
             }}
             exit={{
@@ -76,7 +78,7 @@ export function PixelCat({ className }: { className?: string }) {
             }}
             transition={{
               duration: 1.5,
-              repeat: 2, // Повторим 2 раза (всего 3 цикла)
+              repeat: 2,
               repeatType: "loop",
               ease: "easeInOut",
             }}
@@ -92,7 +94,6 @@ export function PixelCat({ className }: { className?: string }) {
         )}
       </AnimatePresence>
 
-      {/* 2. Меню выбора */}
       <AnimatePresence>
         {status === "menu" && (
           <motion.div
@@ -112,12 +113,14 @@ export function PixelCat({ className }: { className?: string }) {
             </p>
             <div className="flex gap-4">
               <button
+                type="button"
                 onClick={() => handlePet(true)}
                 className="text-garden-moss hover:text-garden-rust font-pixel text-sm cursor-pointer transition-colors"
               >
                 ДА
               </button>
               <button
+                type="button"
                 onClick={() => handlePet(false)}
                 className="text-zinc-500 hover:text-garden-cream font-pixel text-sm cursor-pointer transition-colors"
               >
@@ -128,13 +131,13 @@ export function PixelCat({ className }: { className?: string }) {
         )}
       </AnimatePresence>
 
-      {/* 3. Ссылка на GitHub */}
       <AnimatePresence>
         {isHappy && (
           <motion.a
             key="github-link"
             href="https://github.com/MaksChocomint/makschocomint-portfolio"
             target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 60 }}
             exit={{
@@ -150,28 +153,31 @@ export function PixelCat({ className }: { className?: string }) {
         )}
       </AnimatePresence>
 
-      {/* 4. Тело котика */}
-      <motion.div
-        className={`relative ${
-          isLocked ? "pointer-events-none grayscale-[0.5]" : "cursor-pointer"
+      <motion.button
+        type="button"
+        className={`relative block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-garden-moss ${
+          isInteractive ? "cursor-pointer" : "pointer-events-none grayscale-[0.5]"
         }`}
         onClick={handleCatClick}
-        whileHover={!isLocked && !isHappy ? { scale: 1.05 } : {}}
-        whileTap={!isLocked && !isHappy ? { scale: 0.95 } : {}}
+        aria-label={status === "menu" ? "Закрыть меню котика" : "Открыть меню котика"}
+        aria-expanded={status === "menu"}
+        disabled={!isInteractive}
+        whileHover={isInteractive ? { scale: 1.05 } : {}}
+        whileTap={isInteractive ? { scale: 0.95 } : {}}
       >
         <Image
           width={150}
           height={150}
           src="/art/cat.svg"
-          alt="Cat"
+          alt=""
+          aria-hidden="true"
           className="block"
-          priority
         />
 
-        {/* Глаза */}
         <motion.img
           src="/art/cat_blink.svg"
-          alt="Cat blinking"
+          alt=""
+          aria-hidden="true"
           className="absolute top-0 left-0 w-full h-auto pointer-events-none"
           initial={{ opacity: 0 }}
           animate={isHappy ? { opacity: 1 } : { opacity: [0, 0, 1, 0, 0] }}
@@ -179,7 +185,6 @@ export function PixelCat({ className }: { className?: string }) {
             isHappy
               ? {
                   duration: 0.2,
-                  repeat: 0, // Убираем повторение для счастливого состояния
                 }
               : {
                   repeat: Infinity,
@@ -189,9 +194,8 @@ export function PixelCat({ className }: { className?: string }) {
                 }
           }
         />
-      </motion.div>
+      </motion.button>
 
-      {/* 5. Анимация блокировки */}
       <AnimatePresence>
         {isLocked && (
           <motion.div

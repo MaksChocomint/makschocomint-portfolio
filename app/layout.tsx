@@ -1,30 +1,13 @@
 import type { Metadata } from "next";
-// Заменяем VT323 на Pixelify_Sans, так как VT323 не умеет в кириллицу
-import { JetBrains_Mono, Press_Start_2P } from "next/font/google";
 import "./globals.css";
 import Metrika from "@/lib/Metrika";
-// 1. Настраиваем пиксельный шрифт с поддержкой кириллицы
-const pixelFont = Press_Start_2P({
-  subsets: ["latin", "cyrillic"], // Обязательно добавляем cyrillic
-  weight: "400", // Берем разные начертания для гибкости
-  variable: "--font-pixel",
-  display: "swap",
-});
-
-// 2. Настраиваем моноширинный шрифт (для кода и подписей)
-const monoFont = JetBrains_Mono({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-mono",
-  display: "swap",
-});
+import { MotionProvider } from "@/components/ui/MotionProvider";
 
 export const metadata: Metadata = {
-  // Переводим метаданные на русский для SEO в РФ/СНГ
-  title: "Максим Иванов | Портфолио Разработчика",
-
+  metadataBase: new URL("https://makschocomint.ru"),
+  title: "Максим Иванов | Портфолио разработчика",
   description:
     "Fullstack веб-разработчик. Создаю быстрые SPA приложения на Next.js, проектирую интерфейсы.",
-
   keywords: [
     "веб-разработка",
     "Next.js разработчик",
@@ -40,30 +23,35 @@ export const metadata: Metadata = {
     "Создание сайтов",
     "Максим Иванов",
   ],
-
   authors: [{ name: "Maksim Ivanov", url: "https://t.me/makschocomint" }],
-
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Максим Иванов | Портфолио Разработчика",
+    title: "Максим Иванов | Портфолио разработчика",
     description: "Разработка эстетичных сайтов",
-    url: "http://localhost:3000/",
+    url: "/",
     siteName: "Portfolio Maxim Ivanov",
     locale: "ru_RU",
     type: "website",
     images: [
       {
-        url: "/og-image.png", // Сделай отдельную картинку с русским текстом
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Портфолио разработчика Максима Иванова",
       },
     ],
   },
-
-  // Иконки (фавиконки)
+  twitter: {
+    card: "summary_large_image",
+    title: "Максим Иванов | Портфолио разработчика",
+    description: "Разработка эстетичных сайтов",
+    images: ["/og-image.png"],
+  },
   icons: {
     icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    apple: "/apple-icon.png",
   },
 };
 
@@ -80,10 +68,8 @@ export default function RootLayout({
           content="Makschocomint Portfolio"
         />
       </head>
-      <body
-        className={`${pixelFont.variable} ${monoFont.variable} antialiased bg-garden-dark text-garden-text selection:bg-garden-moss selection:text-garden-dark`}
-      >
-        {children}
+      <body className="antialiased bg-garden-dark text-garden-cream selection:bg-garden-moss selection:text-garden-dark">
+        <MotionProvider>{children}</MotionProvider>
         <Metrika />
       </body>
     </html>

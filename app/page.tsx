@@ -59,7 +59,7 @@ export default function Home() {
                       alt={service.title}
                       width={96}
                       height={96}
-                      priority={idx < 2}
+                      loading="lazy"
                     />
                     <div className="sm:hidden font-pixel text-base text-white text-right">
                       <div>{service.price}</div>

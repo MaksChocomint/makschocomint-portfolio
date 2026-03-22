@@ -1,82 +1,91 @@
 "use client";
+
+import { useReducedMotion } from "framer-motion";
+
+const TETRIS_PIECES = [
+  {
+    id: 1,
+    color: "var(--color-garden-moss)",
+    shape: [
+      [1, 1],
+      [1, 1],
+    ],
+    x: 10,
+    y: 15,
+  },
+  {
+    id: 2,
+    color: "var(--color-garden-rust)",
+    shape: [[1, 1, 1, 1]],
+    x: 50,
+    y: 10,
+  },
+  {
+    id: 3,
+    color: "var(--color-garden-rust)",
+    shape: [[1], [1], [1], [1]],
+    x: 5,
+    y: 70,
+  },
+  {
+    id: 4,
+    color: "var(--color-garden-cream)",
+    shape: [
+      [1, 1, 1],
+      [0, 1, 0],
+    ],
+    x: 85,
+    y: 5,
+  },
+  {
+    id: 5,
+    color: "var(--color-garden-moss)",
+    shape: [
+      [1, 1, 0],
+      [0, 1, 1],
+    ],
+    x: 25,
+    y: 60,
+  },
+  {
+    id: 6,
+    color: "var(--color-garden-rust)",
+    shape: [
+      [0, 1, 1],
+      [1, 1, 0],
+    ],
+    x: 70,
+    y: 45,
+  },
+  {
+    id: 7,
+    color: "var(--color-garden-cream)",
+    shape: [[1], [1], [1], [1]],
+    x: 40,
+    y: 80,
+  },
+  {
+    id: 8,
+    color: "var(--color-garden-moss)",
+    shape: [
+      [1, 1, 1],
+      [1, 0, 0],
+    ],
+    x: 90,
+    y: 65,
+  },
+];
+
+const FALLING_POSITIONS = [20, 40, 60, 80];
+
 export function TetrisBackground() {
-  const tetrisPieces = [
-    {
-      id: 1,
-      color: "var(--color-garden-moss)",
-      shape: [
-        [1, 1],
-        [1, 1],
-      ],
-      x: 10,
-      y: 15,
-    },
-    {
-      id: 2,
-      color: "var(--color-garden-rust)",
-      shape: [[1, 1, 1, 1]],
-      x: 50,
-      y: 10,
-    },
-    {
-      id: 3,
-      color: "var(--color-garden-rust)",
-      shape: [[1], [1], [1], [1]],
-      x: 5,
-      y: 70,
-    },
-    {
-      id: 4,
-      color: "var(--color-garden-cream)",
-      shape: [
-        [1, 1, 1],
-        [0, 1, 0],
-      ],
-      x: 85,
-      y: 5,
-    },
-    {
-      id: 5,
-      color: "var(--color-garden-moss)",
-      shape: [
-        [1, 1, 0],
-        [0, 1, 1],
-      ],
-      x: 25,
-      y: 60,
-    },
-    {
-      id: 6,
-      color: "var(--color-garden-rust)",
-      shape: [
-        [0, 1, 1],
-        [1, 1, 0],
-      ],
-      x: 70,
-      y: 45,
-    },
-    {
-      id: 7,
-      color: "var(--color-garden-cream)",
-      shape: [[1], [1], [1], [1]],
-      x: 40,
-      y: 80,
-    },
-    {
-      id: 8,
-      color: "var(--color-garden-moss)",
-      shape: [
-        [1, 1, 1],
-        [1, 0, 0],
-      ],
-      x: 90,
-      y: 65,
-    },
-  ];
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1] opacity-20">
-      {/* Сетка для тетриса */}
+    <div
+      aria-hidden="true"
+      className="fixed inset-0 overflow-hidden pointer-events-none z-[-1] opacity-20"
+    >
       <div
         className="absolute inset-0"
         style={{
@@ -89,11 +98,10 @@ export function TetrisBackground() {
         }}
       />
 
-      {/* Фигуры тетриса */}
-      {tetrisPieces.map((piece) => (
+      {TETRIS_PIECES.map((piece) => (
         <div
           key={piece.id}
-          className="absolute animate-pulse-slow"
+          className={prefersReducedMotion ? "absolute" : "absolute animate-pulse-slow"}
           style={{
             left: `${piece.x}%`,
             top: `${piece.y}%`,
@@ -112,9 +120,9 @@ export function TetrisBackground() {
                       style={{
                         backgroundColor: piece.color,
                         boxShadow: `
-                        inset 2px 2px 4px rgba(255,255,255,0.2),
-                        inset -2px -2px 4px rgba(0,0,0,0.3)
-                      `,
+                          inset 2px 2px 4px rgba(255,255,255,0.2),
+                          inset -2px -2px 4px rgba(0,0,0,0.3)
+                        `,
                         border: "1px solid rgba(0,0,0,0.2)",
                       }}
                     />
@@ -125,36 +133,36 @@ export function TetrisBackground() {
         </div>
       ))}
 
-      {/* Падающие блоки */}
-      {[20, 40, 60, 80].map((pos, idx) => (
-        <div
-          key={`falling-${idx}`}
-          className="absolute"
-          style={{
-            left: `${pos}%`,
-            top: "-20px",
-            animation: `fall linear ${15 + idx * 2}s infinite`,
-            animationDelay: `${idx * 3}s`,
-          }}
-        >
-          <div className="flex flex-col gap-0.5">
-            {[0, 1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="w-6 h-6"
-                style={{
-                  backgroundColor:
-                    idx % 2 === 0
-                      ? "var(--color-garden-moss)"
-                      : "var(--color-garden-rust)",
-                  opacity: 0.4 - i * 0.1,
-                  boxShadow: "inset 1px 1px 3px rgba(255,255,255,0.1)",
-                }}
-              />
-            ))}
+      {!prefersReducedMotion &&
+        FALLING_POSITIONS.map((pos, idx) => (
+          <div
+            key={`falling-${idx}`}
+            className="absolute"
+            style={{
+              left: `${pos}%`,
+              top: "-20px",
+              animation: `fall linear ${15 + idx * 2}s infinite`,
+              animationDelay: `${idx * 3}s`,
+            }}
+          >
+            <div className="flex flex-col gap-0.5">
+              {[0, 1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="w-6 h-6"
+                  style={{
+                    backgroundColor:
+                      idx % 2 === 0
+                        ? "var(--color-garden-moss)"
+                        : "var(--color-garden-rust)",
+                    opacity: 0.4 - i * 0.1,
+                    boxShadow: "inset 1px 1px 3px rgba(255,255,255,0.1)",
+                  }}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
       <style jsx>{`
         @keyframes fall {
