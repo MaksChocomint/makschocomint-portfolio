@@ -15,9 +15,10 @@ export function Hero() {
               <Image
                 src="/hero/profile_pic.webp"
                 alt="Profile Picture"
-                width={300}
-                height={300}
+                width={320}
+                height={320}
                 className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 border-2 border-garden-cream shadow-md shadow-garden-cream/30"
+                sizes="(max-width: 640px) 96px, (max-width: 768px) 112px, 128px"
                 priority
               />
             </div>

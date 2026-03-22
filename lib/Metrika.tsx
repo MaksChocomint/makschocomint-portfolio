@@ -9,23 +9,26 @@ const COUNTER_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID;
 function MetrikaContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
 
   useEffect(() => {
     if (typeof window.ym !== "undefined" && COUNTER_ID) {
-      const url =
-        pathname +
-        (searchParams.toString() ? "?" + searchParams.toString() : "");
+      const url = pathname + (queryString ? "?" + queryString : "");
       window.ym(Number(COUNTER_ID), "hit", url);
     }
-  }, [pathname, searchParams]);
+  }, [pathname, queryString]);
 
   return null;
 }
 
 export default function Metrika() {
+  if (!COUNTER_ID) {
+    return null;
+  }
+
   return (
     <>
-      <Script id="yandex-metrika" strategy="afterInteractive">
+      <Script id="yandex-metrika" strategy="lazyOnload">
         {`
           (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
           m[i].l=1*new Date();
@@ -38,7 +41,7 @@ export default function Metrika() {
             clickmap:true,
             trackLinks:true,
             accurateTrackBounce:true,
-            webvisor:true,
+            webvisor:false,
             ecommerce:"dataLayer"
           });
         `}

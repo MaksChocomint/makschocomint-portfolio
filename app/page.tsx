@@ -2,7 +2,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import { BloomingSection } from "@/components/ui/BloomingSection";
-import { PixelCat } from "@/components/art/PixelCat";
+import { LazyPixelCat } from "@/components/art/LazyPixelCat";
 import { TetrisBackground } from "@/components/ui/TetrisBackground";
 import { ScrollObserver } from "@/components/ui/ScrollObserver";
 import Image from "next/image";
@@ -132,7 +132,7 @@ export default function Home() {
             </a>
           </div>
           <div className="relative mt-12 sm:mt-16 sm:absolute sm:right-1/2 sm:translate-x-1/2 md:right-10 md:translate-x-0 sm:-bottom-20 md:bottom-0 grayscale-50 hover:grayscale-0 transition-all">
-            <PixelCat className="scale-90 sm:scale-100" />
+            <LazyPixelCat className="scale-90 sm:scale-100" />
           </div>
         </footer>
       </main>

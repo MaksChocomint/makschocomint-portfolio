@@ -65,10 +65,11 @@ export function Projects({ data }: { data: Project[] }) {
                     {project.imageUrl ? (
                       <Image
                         src={project.imageUrl}
-                        width={1280}
-                        height={720}
+                        width={960}
+                        height={540}
                         alt={project.title}
                         className="object-cover w-full h-full"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 560px"
                         priority={currentPage === 1 && i < 2}
                       />
                     ) : (
