@@ -131,7 +131,7 @@ export default function Home() {
               Github
             </a>
           </div>
-          <div className="relative mt-12 sm:mt-16 sm:absolute sm:right-1/2 sm:translate-x-1/2 md:right-10 md:translate-x-0 sm:-bottom-20 md:bottom-0 grayscale-50 hover:grayscale-0 transition-all">
+          <div className="relative mt-12 mx-auto w-fit sm:mt-16 sm:absolute sm:right-1/2 sm:translate-x-1/2 md:right-10 md:translate-x-0 sm:-bottom-20 md:bottom-0 transition-all">
             <LazyPixelCat className="scale-90 sm:scale-100" />
           </div>
         </footer>

@@ -62,9 +62,11 @@ export function PixelCat({ className }: { className?: string }) {
     scheduleReset(2000);
   };
 
+  const isMenuOpen = status === "menu";
   const isLocked = status === "rejected";
   const isHappy = status === "accepted";
   const isInteractive = !isLocked && !isHappy;
+  const isHighlighted = isMenuOpen || isHappy;
 
   return (
     <div
@@ -111,7 +113,7 @@ export function PixelCat({ className }: { className?: string }) {
       </AnimatePresence>
 
       <AnimatePresence>
-        {status === "menu" && (
+        {isMenuOpen && (
           <motion.div
             key="menu"
             initial={{ opacity: 0, y: -42, scale: 0.94 }}
@@ -175,20 +177,22 @@ export function PixelCat({ className }: { className?: string }) {
       <motion.button
         type="button"
         className={`relative block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-garden-moss ${
-          isInteractive
-            ? "cursor-pointer"
-            : "pointer-events-none grayscale-[0.5]"
+          isInteractive ? "cursor-pointer" : "pointer-events-none"
         }`}
         onClick={handleCatClick}
         aria-label={
           status === "menu" ? "Закрыть меню котика" : "Открыть меню котика"
         }
-        aria-expanded={status === "menu"}
+        aria-expanded={isMenuOpen}
         aria-disabled={!isInteractive}
         animate={{
-          scale: status === "menu" ? 1.02 : 1,
-          y: status === "menu" ? -2 : 0,
-          filter: isLocked ? "grayscale(0.5)" : "grayscale(0)",
+          scale: isMenuOpen ? 1.02 : 1,
+          y: isMenuOpen ? -2 : 0,
+          filter: isLocked
+            ? "grayscale(0.55) brightness(0.85)"
+            : isHighlighted
+              ? "grayscale(0) brightness(1)"
+              : "grayscale(0.55) brightness(0.92)",
         }}
         transition={buttonSpring}
         whileHover={isInteractive ? { scale: 1.035, y: -4 } : undefined}
