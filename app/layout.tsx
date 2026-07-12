@@ -87,7 +87,7 @@ const jsonLd = [
     sameAs: [
       "https://github.com/MaksChocomint",
       "https://t.me/makschocomint",
-      "https://shikimatch.ru",
+      "https://shikimatch.com",
     ],
     knowsAbout: [
       "Next.js",

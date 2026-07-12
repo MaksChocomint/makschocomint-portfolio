@@ -20,7 +20,7 @@ export const PROJECTS_DATA: Project[] = [
     title: "ShikiMatch",
     desc: "Лаборатория аниме-вкусов: анализ профиля Shikimori, 33 класса зрителя, персональные рекомендации, совместимость и ежедневный аниме-квиз. Живой продукт с премиум-подпиской, платежами, Telegram-ботом и браузерным расширением.",
     imageUrl: "/projects/shikimatch.webp",
-    demoLink: "https://shikimatch.ru",
+    demoLink: "https://shikimatch.com",
     featured: true,
     highlights: [
       "90 000+ профилей в анализе вкуса",

@@ -50,7 +50,7 @@ export function Hero() {
           веб-приложения под ключ — от лендинга до продукта с платежами, ботами
           и аналитикой. Флагман —{" "}
           <a
-            href="https://shikimatch.ru"
+            href="https://shikimatch.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-garden-moss hover:text-garden-rust underline underline-offset-4 transition-colors"
