@@ -1,4 +1,42 @@
-export const PROJECTS_DATA = [
+export type Project = {
+  id: number;
+  title: string;
+  desc: string;
+  imageUrl?: string;
+  githubLink?: string;
+  demoLink?: string;
+  isHot?: boolean;
+  /** Флагманский проект: широкая карточка над сеткой, вне пагинации. */
+  featured?: boolean;
+  /** Ключевые факты (метрики продукта) для флагманской карточки. */
+  highlights?: string[];
+  /** Стек-теги для флагманской карточки. */
+  tags?: string[];
+};
+
+export const PROJECTS_DATA: Project[] = [
+  {
+    id: 0,
+    title: "ShikiMatch",
+    desc: "Лаборатория аниме-вкусов: анализ профиля Shikimori, 33 класса зрителя, персональные рекомендации, совместимость и ежедневный аниме-квиз. Живой продукт с премиум-подпиской, платежами, Telegram-ботом и браузерным расширением.",
+    imageUrl: "/projects/shikimatch.webp",
+    demoLink: "https://shikimatch.ru",
+    featured: true,
+    highlights: [
+      "90 000+ профилей в анализе вкуса",
+      "ML-кластеризация: 33 класса зрителя",
+      "Ежедневный квиз, лидерборды и архив",
+      "Подписка, платежи (ЮKassa), бот, расширение",
+    ],
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "ML-кластеризация",
+      "Telegram Bot API",
+    ],
+  },
   {
     id: 1,
     title: "AmphiLab",
@@ -6,7 +44,7 @@ export const PROJECTS_DATA = [
     imageUrl: "/projects/amphilab.webp",
     githubLink: "https://github.com/MaksChocomint/amphilab",
     demoLink: "",
-    isHot: true,
+    isHot: false,
   },
   {
     id: 2,

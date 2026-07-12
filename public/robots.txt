@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://makschocomint.ru/sitemap.xml
 Host: https://makschocomint.ru

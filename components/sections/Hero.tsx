@@ -46,7 +46,18 @@ export function Hero() {
           className="font-mono text-zinc-400 max-w-lg text-sm sm:text-base p-2 sm:p-4 animate-fade-in opacity-0"
           style={{ animationFillMode: "forwards", animationDelay: "200ms" }}
         >
-          Fullstack-разработчик
+          Fullstack-разработчик · Next.js / React / TypeScript. Делаю сайты и
+          веб-приложения под ключ — от лендинга до продукта с платежами, ботами
+          и аналитикой. Флагман —{" "}
+          <a
+            href="https://shikimatch.ru"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-garden-moss hover:text-garden-rust underline underline-offset-4 transition-colors"
+          >
+            ShikiMatch
+          </a>
+          : лаборатория аниме-вкусов, 90&nbsp;000+ проанализированных профилей.
         </p>
         <div
           className="flex gap-3 sm:gap-4 justify-center md:justify-start p-2 sm:p-4 font-pixel text-lg sm:text-xl animate-fade-in opacity-0"
