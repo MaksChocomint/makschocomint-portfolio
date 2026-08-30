@@ -47,15 +47,6 @@ export const PROJECTS_DATA: Project[] = [
     isHot: false,
   },
   {
-    id: 2,
-    title: "Flatpoint",
-    desc: "Сайт для бронирования квартир и домов с просмотром объектов, выбором условий и оплатой.",
-    imageUrl: "/projects/flatpoint.webp",
-    githubLink: "https://github.com/MaksChocomint/house_frontend_application",
-    demoLink: "https://makschocomint-house-frontend-application-a4c3.twc1.net",
-    isHot: false,
-  },
-  {
     id: 3,
     title: "AI-Codenames",
     desc: 'Онлайн-игра "Codenames" с комнатами, ИИ-ботами, разными режимами и партиями в реальном времени.',

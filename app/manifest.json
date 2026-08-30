@@ -1,6 +1,7 @@
 {
-  "name": "Makschocomint Portfolio",
-  "short_name": "Maks",
+  "name": "Максим Иванов — сайты и веб-приложения",
+  "short_name": "Maks Web",
+  "description": "Портфолио веб-дизайнера и разработчика Максима Иванова",
   "lang": "ru",
   "start_url": "/",
   "display": "standalone",

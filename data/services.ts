@@ -1,10 +1,21 @@
 export const SERVICES_DATA = [
-  { title: "Лендинг", price: "от 3 000 ₽", icon: "/art/sappling.svg" },
-  { title: "Веб приложение", price: "от 5 000 ₽", icon: "/art/tree.svg" },
   {
-    title: "Поддержка и хостинг",
-    price: "от 100 ₽",
+    title: "Готовая концепция",
+    price: "от 9 900 ₽",
+    description: "Адаптирую выбранный пример под ваш бренд, тексты и контакты.",
+    icon: "/art/sappling.svg",
+  },
+  {
+    title: "Сайт с нуля",
+    price: "от 30 000 ₽",
+    description: "Структура, дизайн и разработка под задачу без готового шаблона.",
+    icon: "/art/tree.svg",
+  },
+  {
+    title: "Поддержка",
+    price: "от 1 500 ₽",
     period: "в месяц",
+    description: "Обновления, небольшие правки и контроль работы сайта.",
     icon: "/art/drop.svg",
   },
 ];

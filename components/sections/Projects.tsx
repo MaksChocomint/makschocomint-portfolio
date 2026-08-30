@@ -38,7 +38,7 @@ export function Projects({ data }: { data: Project[] }) {
     <section ref={sectionRef}>
       <div className="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
         <h2 className="font-pixel text-3xl sm:text-4xl md:text-5xl text-garden-cream">
-          Квесты_
+          Веб-приложения_
         </h2>
         <div className="h-0.5 bg-garden-dim flex-1 opacity-30"></div>
       </div>
