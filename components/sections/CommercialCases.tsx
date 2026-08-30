@@ -19,7 +19,8 @@ export function CommercialCases({ cases }: { cases: CaseStudy[] }) {
         <p className="font-mono text-sm text-zinc-400 max-w-2xl leading-relaxed">
           Здесь не макеты-картинки, а работающие сайты. Пять концепций сделаны
           для петербургских бизнесов, Flatpoint — полноценное веб-приложение.
-          Любой подход можно адаптировать под вашу задачу, материалы и бренд.
+          Кейсы показывают диапазон задач и стилей. Для вашего бизнеса могу
+          разработать совершенно новую концепцию с нуля.
         </p>
       </div>
 
@@ -85,12 +86,12 @@ export function CommercialCases({ cases }: { cases: CaseStudy[] }) {
                 <a
                   className="pixel-button pixel-button--secondary"
                   href={`https://t.me/makschocomint?text=${encodeURIComponent(
-                    `Здравствуйте! Мне понравился проект ${item.title}. Хочу обсудить похожий сайт.`,
+                    `Здравствуйте! Я посмотрел проект ${item.title} и хочу обсудить сайт для своего бизнеса.`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Заказать похожий_
+                  Обсудить проект_
                 </a>
               </div>
             </article>
