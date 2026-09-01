@@ -3,6 +3,8 @@ import { BloomingSection } from "../ui/BloomingSection";
 import type { CaseStudy } from "@/data/cases";
 
 export function CommercialCases({ cases }: { cases: CaseStudy[] }) {
+  const total = String(cases.length).padStart(2, "0");
+
   return (
     <section id="business-cases" className="scroll-mt-8 on-scroll">
       <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-6">
@@ -14,10 +16,10 @@ export function CommercialCases({ cases }: { cases: CaseStudy[] }) {
 
       <div className="business-intro mb-8 sm:mb-10">
         <p className="font-pixel text-garden-moss text-sm sm:text-base">
-          6 решений, которые можно открыть и проверить
+          {cases.length} решений, которые можно открыть и проверить
         </p>
         <p className="font-mono text-sm text-zinc-400 max-w-2xl leading-relaxed">
-          Здесь не макеты-картинки, а работающие сайты. Пять концепций сделаны
+          Здесь не макеты-картинки, а работающие сайты. Десять концепций сделаны
           для петербургских бизнесов, Flatpoint — полноценное веб-приложение.
           Кейсы показывают диапазон задач и стилей. Для вашего бизнеса могу
           разработать совершенно новую концепцию с нуля.
@@ -57,7 +59,7 @@ export function CommercialCases({ cases }: { cases: CaseStudy[] }) {
               <div className="flex items-center justify-between gap-4 font-mono text-[11px] sm:text-xs uppercase text-zinc-500">
                 <span>{item.category}</span>
                 <span className="shrink-0 text-garden-rust">
-                  {String(index + 1).padStart(2, "0")}/06
+                  {String(index + 1).padStart(2, "0")}/{total}
                 </span>
               </div>
 
