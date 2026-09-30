@@ -53,7 +53,9 @@ export function ScrollObserver() {
         });
       },
       {
-        threshold: 0.1,
+        // A ratio threshold never fires for sections taller than ~10 viewports
+        // (e.g. the business cases list on mobile), so reveal on first overlap.
+        threshold: 0,
         rootMargin: "0px 0px -50px 0px",
       },
     );
